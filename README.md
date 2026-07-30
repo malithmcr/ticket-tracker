@@ -50,3 +50,8 @@ Given the time constraint, I will prioritise:
 ## Getting started
 
 ### TODO
+
+Usefull commands
+docker compose exec web python manage.py makemigrations
+docker compose exec web python manage.py migrate
+docker compose exec web python manage.py check
