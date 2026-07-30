@@ -1,7 +1,7 @@
 [project]
 name = "ticket-tracker-app"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ticket tracker internal tool"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -19,3 +19,17 @@ dev = [
     "pytest-django>=4.12.0",
     "ruff>=0.16.0",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "-q"
+
+[tool.ruff.lint]
+ignore = [
+    "RUF012",  # Django Meta uses mutable class attributes by design
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/migrations/*.py" = ["ALL"]
+"tickets/admin.py" = ["F401"]

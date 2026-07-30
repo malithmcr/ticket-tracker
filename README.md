@@ -26,25 +26,24 @@ Given the time constraint, I will prioritise:
 
 ## Implementation plan
 ### Must have
-- [ ] Project setup and Docker
-- [ ] Authentication
-- [ ] Customer and Agent roles
-- [ ] Ticket model and CRUD
-- [ ] Customer ticket access and isolation
-- [ ] Comments
-- [ ] Agent ticket management
-- [ ] Status and priority
-- [ ] Assignment
-- [ ] Search and filtering
-- [ ] Pagination
-- [ ] Dashboard
+- [x] Project setup and Docker
+- [x] Authentication
+- [x] Customer and Agent roles
+- [x] Ticket model and CRUD
+- [x] Customer ticket access and isolation
+- [x] Comments
+- [x] Agent ticket management
+- [x] Status and priority
+- [x] Assignment
+- [x] Search and filtering
+- [x] Pagination
+- [x] Dashboard
 - [ ] Seed data
-- [ ] Core tests
 
 ### Nice to have
-- [ ] Live updates
-- [ ] UI feedback
-- [ ] Additional UI polish
+- [x] Live updates
+- [x] UI feedback
+- [x] Additional UI polish
 - [ ] Tests
 
 ## Getting started
