@@ -3,7 +3,7 @@ name = "ticket-tracker-app"
 version = "0.1.0"
 description = "Ticket tracker internal tool"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
     "django>=6.0.7",
     "django-htmx>=1.28.0",
