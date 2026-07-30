@@ -1,8 +1,6 @@
 import pytest
 from django.urls import reverse
 
-from tickets.models import Comment, Ticket
-
 
 @pytest.mark.django_db
 def test_customer_cannot_access_another_customers_ticket(
