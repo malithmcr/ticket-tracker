@@ -32,4 +32,3 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "**/migrations/*.py" = ["ALL"]
-"tickets/admin.py" = ["F401"]

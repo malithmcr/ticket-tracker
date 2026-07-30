@@ -54,7 +54,7 @@ Given the time constraint, I will prioritise:
 cp .env.example .env
 ```
 
-Edit `.env` if you want different Postgres credentials. Defaults work with Docker Compose.
+Edit `.env` if you want different Postgres credentials. Defaults work with Docker Compose. `SECRET_KEY` and `DEBUG` come from `.env` (not production-ready as-is).
 
 ### 2. Start the app
 
