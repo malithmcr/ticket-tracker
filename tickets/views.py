@@ -5,11 +5,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
-from .forms import AgentTicketUpdateForm, TicketForm
+from .forms import AgentTicketUpdateForm, CommentForm, TicketForm
 from .models import Ticket
 
 TICKETS_PER_PAGE = 20
-
 
 
 def _format_avg_resolution(avg_delta):
@@ -32,7 +31,6 @@ def _format_avg_resolution(avg_delta):
         display = f"{minutes}m"
 
     return display, "Across tickets with a resolution timestamp"
-
 
 
 @login_required
@@ -71,6 +69,7 @@ def customer_ticket_detail(request, pk):
         "tickets/customer/ticket_detail.html",
         {
             "ticket": ticket,
+            "comment_form": CommentForm(),
         },
     )
 
@@ -96,6 +95,29 @@ def ticket_create(request):
         request,
         "tickets/customer/ticket_form.html",
         {"form": form},
+    )
+
+
+@login_required
+@require_POST
+def add_comment(request, pk):
+    ticket = get_object_or_404(
+        Ticket,
+        pk=pk,
+        customer=request.user,
+    )
+
+    form = CommentForm(request.POST)
+
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.ticket = ticket
+        comment.author = request.user
+        comment.save()
+
+    return redirect(
+        "tickets:customer_ticket_detail",
+        pk=ticket.pk,
     )
 
 
@@ -240,6 +262,7 @@ def agent_ticket_detail(request, pk):
         {
             "ticket": ticket,
             "update_form": AgentTicketUpdateForm(instance=ticket),
+            "comment_form": CommentForm(),
         },
     )
 
@@ -265,3 +288,21 @@ def agent_update_ticket(request, pk):
 
     return redirect("tickets:agent_ticket_detail", pk=ticket.pk)
 
+
+@login_required
+@permission_required(
+    "tickets.can_manage_tickets",
+    raise_exception=True,
+)
+@require_POST
+def agent_add_comment(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    form = CommentForm(request.POST)
+
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.ticket = ticket
+        comment.author = request.user
+        comment.save()
+
+    return redirect("tickets:agent_ticket_detail", pk=ticket.pk)

@@ -26,6 +26,12 @@ urlpatterns = [
     ),
 
     path(
+        "tickets/<int:pk>/comment/",
+        views.add_comment,
+        name="add_comment",
+    ),
+
+    path(
         "agent/",
         views.agent_dashboard,
         name="agent_dashboard",
@@ -45,5 +51,9 @@ urlpatterns = [
         views.agent_update_ticket,
         name="agent_update_ticket",
     ),
-
+    path(
+        "agent/tickets/<int:pk>/comment/",
+        views.agent_add_comment,
+        name="agent_add_comment",
+    ),
 ]

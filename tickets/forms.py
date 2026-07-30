@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import Ticket
+from .models import Comment, Ticket
 
 User = get_user_model()
 
@@ -27,6 +27,26 @@ class TicketForm(forms.ModelForm):
                     "rows": 5,
                 }
             ),
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [
+            "body",
+        ]
+        widgets = {
+            "body": forms.Textarea(
+                attrs={
+                    "class": "textarea textarea-bordered w-full border-slate-200 bg-white",
+                    "placeholder": "Write a comment…",
+                    "rows": 3,
+                }
+            ),
+        }
+        labels = {
+            "body": "",
         }
 
 

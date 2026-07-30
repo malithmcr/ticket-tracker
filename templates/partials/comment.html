@@ -1,0 +1,7 @@
+<article class="border-b border-slate-100 py-4 last:border-b-0">
+    <div class="mb-1 flex items-center justify-between gap-2">
+        <strong class="text-slate-900">{{ comment.author.username }}</strong>
+        <time class="text-sm text-slate-400">{{ comment.created_at }}</time>
+    </div>
+    <p class="whitespace-pre-wrap text-slate-700">{{ comment.body }}</p>
+</article>
