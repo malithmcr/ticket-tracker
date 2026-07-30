@@ -38,7 +38,7 @@ Given the time constraint, I will prioritise:
 - [x] Search and filtering
 - [x] Pagination
 - [x] Dashboard
-- [ ] Seed data
+- [x] Seed data
 
 ### Nice to have
 - [x] Live updates
@@ -82,6 +82,9 @@ docker compose exec web python manage.py makemigrations
 docker compose exec web python manage.py migrate
 docker compose exec web python manage.py check
 
+# Seed data
+docker compose exec web python manage.py seed_data
+
 # Django shell
 docker compose exec web python manage.py shell
 
@@ -92,8 +95,19 @@ docker compose exec web python manage.py createsuperuser
 docker compose down
 ```
 
+`seed_data` is safe to re-run because existing seed tickets are skipped.
+
+| Role | Usernames | Password |
+|------|-----------|----------|
+| Customer | `customer1`, `customer2`, `customer3` | `password123` |
+| Agent | `agent1`, `agent2` | `password123` |
+
 After changing Python view code, restart the web container so Gunicorn reloads:
 
 ```bash
 docker compose restart web
 ```
+
+### AI Usage
+Boilerplate: Dockerfile, compose, pytest conftest, login template scaffolding
+HTMX is somehow new to me so had to look it up. I would do this with react if I had time but because of the time restriction I have used HTMX but I got suck a few times and had to use AI and stackoverflow to debug and understand what am I doing wrong. Fixing some grammar on README
