@@ -1,0 +1,54 @@
+<div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+                    <th class="font-semibold"># ID</th>
+                    <th class="font-semibold">Subject</th>
+                    <th class="font-semibold">Customer</th>
+                    <th class="font-semibold">Status</th>
+                    <th class="font-semibold">Priority</th>
+                    <th class="font-semibold">Assignee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in page_obj %}
+                    <tr class="border-b border-slate-100 hover:bg-slate-50/80">
+                        <td class="text-slate-500 font-mono text-sm">
+                            #{{ ticket.pk }}
+                        </td>
+                        <td class="max-w-xs">
+                            <a href="{% url 'tickets:agent_ticket_detail' ticket.pk %}"
+                               class="font-medium text-slate-900 hover:underline">
+                                {{ ticket.title }}
+                            </a>
+                        </td>
+                        <td class="text-slate-600">{{ ticket.customer.username }}</td>
+                        <td>{% include "partials/status_badge.html" %}</td>
+                        <td>{% include "partials/priority_badge.html" %}</td>
+                        <td>
+                            {% if ticket.assigned_agent %}
+                                <div class="flex items-center gap-2">
+                                    <div class="flex h-7 w-7 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-700">
+                                        {{ ticket.assigned_agent.username|slice:":1"|upper }}
+                                    </div>
+                                    <span class="text-sm text-slate-700">{{ ticket.assigned_agent.username }}</span>
+                                </div>
+                            {% else %}
+                                <span class="text-sm text-slate-400">Unassigned</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="py-12 text-center text-slate-500">
+                            No tickets match your filters.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% include "partials/pagination.html" with htmx_target="#ticket-results" %}

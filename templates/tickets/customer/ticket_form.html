@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Create Ticket · Ticket Tracker{% endblock %}
+
+{% block content %}
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Create Ticket</h1>
+        <p class="mt-1 text-slate-500">Describe the issue and we’ll help you resolve it.</p>
+    </div>
+
+    <div class="max-w-2xl rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <label class="form-control w-full">
+                    <span class="mb-1 text-sm font-medium text-slate-700">{{ field.label }}</span>
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="mt-1 text-sm text-error">{{ field.errors|striptags }}</span>
+                    {% endif %}
+                </label>
+            {% endfor %}
+
+            <div class="flex gap-2 pt-2">
+                <button type="submit" class="btn btn-neutral">Create Ticket</button>
+                <a href="{% url 'tickets:customer_tickets' %}" class="btn btn-ghost">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

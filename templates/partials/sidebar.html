@@ -1,0 +1,75 @@
+<aside class="bg-white border-r border-slate-200 min-h-full w-64 flex flex-col">
+   
+
+    {% if user.is_authenticated %}
+        <nav class="flex-1 px-3 py-4">
+            <ul class="menu gap-1 p-0">
+                {% if perms.tickets.can_manage_tickets %}
+                    <li>
+                        <a href="{% url 'tickets:agent_dashboard' %}"
+                           class="rounded-lg {% if request.resolver_match.url_name == 'agent_dashboard' %}bg-slate-100 font-medium text-slate-900{% else %}text-slate-600{% endif %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tbd">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            Tickets
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'tickets:customer_tickets' %}"
+                           class="rounded-lg {% if request.resolver_match.url_name == 'customer_tickets' or request.resolver_match.url_name == 'customer_ticket_detail' %}bg-slate-100 font-medium text-slate-900{% else %}text-slate-600{% endif %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            My Tickets
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tickets:ticket_create' %}"
+                           class="rounded-lg {% if request.resolver_match.url_name == 'ticket_create' %}bg-slate-100 font-medium text-slate-900{% else %}text-slate-600{% endif %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 4v16m8-8H4" />
+                            </svg>
+                            New Ticket
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="mt-auto border-t border-slate-100 p-4">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="avatar placeholder">
+                    <div class="bg-slate-200 text-slate-700 rounded-full w-10 h-10 flex items-center justify-center text-sm font-semibold">
+                        {{ user.username|slice:":1"|upper }}
+                    </div>
+                </div>
+                <div class="min-w-0">
+                    <p class="font-medium text-sm truncate text-slate-900">{{ user.username }}</p>
+                    <p class="text-xs text-slate-500">
+                        {% if perms.tickets.can_manage_tickets %}
+                            Agent
+                        {% else %}
+                            Customer
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-ghost btn-sm w-full justify-start text-slate-600">
+                    Log out
+                </button>
+            </form>
+        </div>
+    {% endif %}
+</aside>

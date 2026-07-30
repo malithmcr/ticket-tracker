@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 
+
 class Ticket(models.Model):
     class Status(models.TextChoices):
         OPEN = "open", "Open"
@@ -16,7 +17,7 @@ class Ticket(models.Model):
     customer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="tickets",
+        related_name="tickets"
     )
 
     assigned_agent = models.ForeignKey(
@@ -24,7 +25,7 @@ class Ticket(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="assigned_tickets",
+        related_name="assigned_tickets"
     )
 
     title = models.CharField(max_length=200)
@@ -33,13 +34,13 @@ class Ticket(models.Model):
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
-        default=Status.OPEN,
+        default=Status.OPEN
     )
 
     priority = models.CharField(
         max_length=20,
         choices=Priority.choices,
-        default=Priority.MEDIUM,
+        default=Priority.MEDIUM
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,7 +52,10 @@ class Ticket(models.Model):
         indexes = [
             models.Index(fields=["status"]),
             models.Index(fields=["priority"]),
-            models.Index(fields=["customer", "status"]),
+            models.Index(fields=["customer", "status"])
+        ]
+        permissions = [
+            ("can_manage_tickets", "Can manage tickets"),
         ]
 
     def __str__(self):
@@ -61,13 +65,13 @@ class Comment(models.Model):
     ticket = models.ForeignKey(
         Ticket,
         on_delete=models.CASCADE,
-        related_name="comments",
+        related_name="comments"
     )
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="ticket_comments",
+        related_name="ticket_comments"
     )
 
     body = models.TextField()

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard · Ticket Tracker{% endblock %}
+
+{% block content %}
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Dashboard</h1>
+        <p class="mt-1 text-slate-500">Overview of support ticket activity.</p>
+    </div>
+
+    <section class="mb-8">
+        <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+            By status
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {% include "partials/dashboard_card.html" with label="Total tickets" value=total_tickets %}
+            {% for item in status_counts %}
+                {% include "partials/dashboard_card.html" with label=item.label value=item.count %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mb-8">
+        <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+            By priority
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {% for item in priority_counts %}
+                {% include "partials/dashboard_card.html" with label=item.label value=item.count %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+            Resolution
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {% include "partials/dashboard_card.html" with label="Average resolution time" value=avg_resolution_display hint=avg_resolution_hint %}
+            {% include "partials/dashboard_card.html" with label="Resolved tickets" value=resolved_count %}
+        </div>
+    </section>
+{% endblock %}
