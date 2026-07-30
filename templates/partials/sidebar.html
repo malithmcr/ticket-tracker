@@ -1,5 +1,14 @@
 <aside class="bg-white border-r border-slate-200 min-h-full w-64 flex flex-col">
-   
+    <div class="px-5 py-6 border-b border-slate-100">
+        <a href="{% url 'tickets:home' %}" class="flex items-center gap-3">
+            <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-400 text-slate-900 font-bold">
+                TT
+            </span>
+            <span class="text-lg font-semibold tracking-tight text-slate-900">
+                Ticket Tracker
+            </span>
+        </a>
+    </div>
 
     {% if user.is_authenticated %}
         <nav class="flex-1 px-3 py-4">
@@ -15,7 +24,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="tbd">
+                        <a href="{% url 'tickets:agent_tickets' %}"
+                           class="rounded-lg {% if request.resolver_match.url_name == 'agent_tickets' or request.resolver_match.url_name == 'agent_ticket_detail' %}bg-slate-100 font-medium text-slate-900{% else %}text-slate-600{% endif %}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>

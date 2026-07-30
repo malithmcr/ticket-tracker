@@ -1,0 +1,33 @@
+{% if page_obj.has_other_pages %}
+    <div class="mt-6 flex justify-center">
+        <div class="join">
+            {% if page_obj.has_previous %}
+                <a class="join-item btn btn-sm bg-white border-slate-200"
+                   href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ page_obj.previous_page_number }}"
+                   {% if htmx_target %}
+                       hx-get="?{{ query_string }}{% if query_string %}&{% endif %}page={{ page_obj.previous_page_number }}"
+                       hx-target="{{ htmx_target }}"
+                       hx-push-url="true"
+                   {% endif %}>
+                    «
+                </a>
+            {% endif %}
+
+            <button class="join-item btn btn-sm btn-active pointer-events-none border-slate-200">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </button>
+
+            {% if page_obj.has_next %}
+                <a class="join-item btn btn-sm bg-white border-slate-200"
+                   href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ page_obj.next_page_number }}"
+                   {% if htmx_target %}
+                       hx-get="?{{ query_string }}{% if query_string %}&{% endif %}page={{ page_obj.next_page_number }}"
+                       hx-target="{{ htmx_target }}"
+                       hx-push-url="true"
+                   {% endif %}>
+                    »
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

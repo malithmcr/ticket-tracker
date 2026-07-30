@@ -8,7 +8,7 @@
             <h1 class="text-3xl font-bold tracking-tight text-slate-900">My Tickets</h1>
             <p class="mt-1 text-slate-500">Track and follow up on your support requests.</p>
         </div>
-        <a href="tbd" class="btn btn-neutral">
+        <a href="{% url 'tickets:ticket_create' %}" class="btn btn-neutral">
             Create Ticket
         </a>
     </div>
@@ -51,7 +51,7 @@
         <div class="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm">
             <h2 class="text-lg font-semibold text-slate-900">No tickets yet</h2>
             <p class="mt-1 text-slate-500">Create your first support ticket to get started.</p>
-            <a href="tbd" class="btn btn-neutral mt-4">
+            <a href="{% url 'tickets:ticket_create' %}" class="btn btn-neutral mt-4">
                 Create Ticket
             </a>
         </div>

@@ -1,0 +1,13 @@
+{% if ticket.priority == "high" %}
+    <span class="inline-flex items-center gap-1 text-sm font-medium text-orange-600">
+        <span aria-hidden="true">↑</span> {{ ticket.get_priority_display }}
+    </span>
+{% elif ticket.priority == "medium" %}
+    <span class="inline-flex items-center gap-1 text-sm font-medium text-sky-600">
+        <span aria-hidden="true">–</span> {{ ticket.get_priority_display }}
+    </span>
+{% else %}
+    <span class="inline-flex items-center gap-1 text-sm font-medium text-slate-500">
+        <span aria-hidden="true">↓</span> {{ ticket.get_priority_display }}
+    </span>
+{% endif %}

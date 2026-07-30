@@ -1,0 +1,17 @@
+{% if ticket.status == "open" %}
+    <span class="inline-flex items-center rounded-full bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-700">
+        {{ ticket.get_status_display }}
+    </span>
+{% elif ticket.status == "in_progress" %}
+    <span class="inline-flex items-center rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
+        {{ ticket.get_status_display }}
+    </span>
+{% elif ticket.status == "resolved" %}
+    <span class="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
+        {{ ticket.get_status_display }}
+    </span>
+{% else %}
+    <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+        {{ ticket.get_status_display }}
+    </span>
+{% endif %}
