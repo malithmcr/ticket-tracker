@@ -56,6 +56,8 @@ cp .env.example .env
 
 Edit `.env` if you want different Postgres credentials. Defaults work with Docker Compose. `SECRET_KEY` and `DEBUG` come from `.env` (not production-ready as-is).
 
+On Railway, set `SECRET_KEY`, `DEBUG=False`, and either `DATABASE_URL` (Railway Postgres) or the `POSTGRES_*` vars. Do not set `PORT` (Railway provides it). `ALLOWED_HOSTS` / CSRF pick up `RAILWAY_PUBLIC_DOMAIN` automatically.
+
 ### 2. Start the app
 
 ```bash
