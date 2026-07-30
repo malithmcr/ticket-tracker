@@ -12,13 +12,16 @@
 </head>
 <body class="bg-slate-50 text-slate-800" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% block body %}
-        <div class="drawer lg:drawer-open min-h-screen">
-            <input id="app-drawer" type="checkbox" class="drawer-toggle">
+        <div class="flex min-h-screen">
+            {# Desktop sidebar — plain flex, does not rely on DaisyUI drawer-open #}
+            <div class="hidden lg:flex shrink-0">
+                {% include "partials/sidebar.html" %}
+            </div>
 
-            <div class="drawer-content flex flex-col min-h-screen">
+            <div class="flex min-w-0 flex-1 flex-col">
                 <div class="navbar bg-white border-b border-slate-200 lg:hidden px-4">
                     <div class="flex-none">
-                        <label for="app-drawer" class="btn btn-square btn-ghost" aria-label="Open menu">
+                        <label for="mobile-drawer" class="btn btn-square btn-ghost" aria-label="Open menu">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
@@ -34,11 +37,17 @@
                     </div>
                 </main>
             </div>
+        </div>
 
-            <div class="drawer-side z-40">
-                <label for="app-drawer" aria-label="Close menu" class="drawer-overlay"></label>
-                {% include "partials/sidebar.html" %}
-            </div>
+        {# Mobile drawer #}
+        <input id="mobile-drawer" type="checkbox" class="peer hidden">
+        <label
+            for="mobile-drawer"
+            class="fixed inset-0 z-40 hidden bg-black/40 peer-checked:block lg:hidden"
+            aria-label="Close menu"
+        ></label>
+        <div class="fixed inset-y-0 left-0 z-50 w-64 -translate-x-full bg-white shadow-xl transition-transform peer-checked:translate-x-0 lg:hidden">
+            {% include "partials/sidebar.html" %}
         </div>
     {% endblock %}
 </body>

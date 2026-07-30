@@ -46,6 +46,9 @@ Given the time constraint, I will prioritise:
 - [x] Additional UI polish
 - [x] Tests
 
+## Live app access: https://ticket-tracker-production-241c.up.railway.app/tickets
+### Check the seed data table below for login info 
+
 ## Getting started
 
 ### 1. Clone and configure
@@ -69,6 +72,10 @@ Login: http://localhost:8000/accounts/login/
 
 Migrations run automatically on container start.
 
+| Role | Usernames | Password |
+|------|-----------|----------|
+| Customer | `customer1`, `customer2`, `customer3` | `password123` |
+| Agent | `agent1`, `agent2` | `password123` |
 
 ### Useful commands
 
@@ -113,3 +120,16 @@ docker compose restart web
 ### AI Usage
 Boilerplate: Dockerfile, compose, pytest conftest, login template scaffolding
 HTMX is somehow new to me so had to look it up. I would do this with react if I had time but because of the time restriction I have used HTMX but I got suck a few times and had to use AI and stackoverflow to debug and understand what am I doing wrong. Fixing some grammar on README
+
+# If I had 3 more hours, I'd add
+
+- Form / UX feedback — Surface validation errors and success messages when comments fail or ticket updates succeed (today invalid POSTs mostly just redirect).
+- Real live updates
+- UI polish
+- Add mroe tests to fix gaps
+- Email (or in-app) notifications
+- Customer list pagination
+- Extract shared ticket-query helpers
+
+
+
