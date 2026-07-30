@@ -44,13 +44,56 @@ Given the time constraint, I will prioritise:
 - [x] Live updates
 - [x] UI feedback
 - [x] Additional UI polish
-- [ ] Tests
+- [x] Tests
 
 ## Getting started
 
-### TODO
+### 1. Clone and configure
 
-Usefull commands
+```bash
+cp .env.example .env
+```
+
+Edit `.env` if you want different Postgres credentials. Defaults work with Docker Compose.
+
+### 2. Start the app
+
+```bash
+docker compose up --build
+```
+
+App: http://localhost:8000  
+Login: http://localhost:8000/accounts/login/
+
+Migrations run automatically on container start.
+
+
+### Useful commands
+
+```bash
+# Run tests
+docker compose exec web sh -c "uv sync --frozen --group dev && python -m pytest"
+
+# Lint
+docker compose exec web python -m ruff check tickets config
+
+# Migration
 docker compose exec web python manage.py makemigrations
 docker compose exec web python manage.py migrate
 docker compose exec web python manage.py check
+
+# Django shell
+docker compose exec web python manage.py shell
+
+# Create a superuser (optional)
+docker compose exec web python manage.py createsuperuser
+
+# Stop
+docker compose down
+```
+
+After changing Python view code, restart the web container so Gunicorn reloads:
+
+```bash
+docker compose restart web
+```
