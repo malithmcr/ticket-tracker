@@ -46,8 +46,11 @@ Given the time constraint, I will prioritise:
 - [x] Additional UI polish
 - [x] Tests
 
-## Live app access: https://ticket-tracker-production-241c.up.railway.app/tickets
-### Check the seed data table below for login info 
+## Live demo
+
+Deployed on Railway: [Open the app](https://ticket-tracker-production-241c.up.railway.app/) · [Login](https://ticket-tracker-production-241c.up.railway.app/accounts/login/)
+
+Demo logins (same as local seed data): `customer1` or `agent1` / `password123` — full list in the table under **Useful commands**.
 
 ## Getting started
 
