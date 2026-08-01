@@ -11,11 +11,11 @@ from .models import Ticket
 TICKETS_PER_PAGE = 20
 
 
-def _format_avg_resolution(avg_delta):
-    if avg_delta is None:
+def _format_avg_resolution(avg_resolution_time):
+    if avg_resolution_time is None:
         return "—", "No resolved tickets yet"
 
-    total_seconds = int(avg_delta.total_seconds())
+    total_seconds = int(avg_resolution_time.total_seconds())
     if total_seconds < 0:
         return "—", "No resolved tickets yet"
 
@@ -129,33 +129,33 @@ def add_comment(request, pk):
 def agent_dashboard(request):
     total_tickets = Ticket.objects.count()
 
-    status_raw = {
+    status_counts_by_value = {
         row["status"]: row["count"]
         for row in Ticket.objects.values("status").annotate(count=Count("id"))
     }
     status_counts = [
         {
             "label": label,
-            "count": status_raw.get(value, 0),
+            "count": status_counts_by_value.get(value, 0),
         }
         for value, label in Ticket.Status.choices
     ]
 
-    priority_raw = {
+    priority_counts_by_value = {
         row["priority"]: row["count"]
         for row in Ticket.objects.values("priority").annotate(count=Count("id"))
     }
     priority_counts = [
         {
             "label": label,
-            "count": priority_raw.get(value, 0),
+            "count": priority_counts_by_value.get(value, 0),
         }
         for value, label in Ticket.Priority.choices
     ]
 
-    resolved_qs = Ticket.objects.filter(resolved_at__isnull=False)
-    resolved_count = resolved_qs.count()
-    avg_delta = resolved_qs.aggregate(
+    tickets_with_resolution_time = Ticket.objects.filter(resolved_at__isnull=False)
+    resolved_count = tickets_with_resolution_time.count()
+    avg_resolution_time = tickets_with_resolution_time.aggregate(
         avg=Avg(
             ExpressionWrapper(
                 F("resolved_at") - F("created_at"),
@@ -163,7 +163,9 @@ def agent_dashboard(request):
             )
         )
     )["avg"]
-    avg_resolution_display, avg_resolution_hint = _format_avg_resolution(avg_delta)
+    avg_resolution_display, avg_resolution_hint = _format_avg_resolution(
+        avg_resolution_time
+    )
 
     return render(
         request,
