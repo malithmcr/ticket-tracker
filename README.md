@@ -24,27 +24,6 @@ Given the time constraint, I will prioritise:
 - Gunicorn
 - Faker - Seeding
 
-## Implementation plan
-### Must have
-- [x] Project setup and Docker
-- [x] Authentication
-- [x] Customer and Agent roles
-- [x] Ticket model and CRUD
-- [x] Customer ticket access and isolation
-- [x] Comments
-- [x] Agent ticket management
-- [x] Status and priority
-- [x] Assignment
-- [x] Search and filtering
-- [x] Pagination
-- [x] Dashboard
-- [x] Seed data
-
-### Nice to have
-- [x] Live updates
-- [x] UI feedback
-- [x] Additional UI polish
-- [x] Tests
 
 ## Live demo
 
@@ -123,16 +102,4 @@ docker compose restart web
 ### AI Usage
 Boilerplate: Dockerfile, compose, pytest conftest, login template scaffolding
 HTMX is somehow new to me so had to look it up. I would do this with react if I had time but because of the time restriction I have used HTMX but I got suck a few times and had to use AI and stackoverflow to debug and understand what am I doing wrong. Fixing some grammar on README
-
-# If I had 3 more hours, I'd add
-
-- Form / UX feedback — Surface validation errors and success messages when comments fail or ticket updates succeed (today invalid POSTs mostly just redirect).
-- Real live updates
-- UI polish
-- Add mroe tests to fix gaps
-- Email (or in-app) notifications
-- Customer list pagination
-- Extract shared ticket-query helpers
-
-
 
