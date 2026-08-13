@@ -1,14 +1,6 @@
 ## Architecture
 ![preview](./docs/preview.png)
 
-## Goals
-Given the time constraint, I will prioritise:
-
-1. Correctness and security
-2. A complete core user experience
-3. Maintainable architecture
-4. Performance for the expected scale
-5. UX improvements and bonus features
 
 
 ## Stack
@@ -99,7 +91,4 @@ After changing Python view code, restart the web container so Gunicorn reloads:
 docker compose restart web
 ```
 
-### AI Usage
-Boilerplate: Dockerfile, compose, pytest conftest, login template scaffolding
-HTMX is somehow new to me so had to look it up. I would do this with react if I had time but because of the time restriction I have used HTMX but I got suck a few times and had to use AI and stackoverflow to debug and understand what am I doing wrong. Fixing some grammar on README
 
